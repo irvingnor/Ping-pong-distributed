@@ -1,0 +1,71 @@
+body {padding: 0; margin: 0; overflow: hidden; 
+  background-image: url("../img/havana.jpg"); 
+   background-repeat: no-repeat;
+    background-position: right top;
+    background-attachment: fixed;
+  }
+
+#game {
+	width:800px; 
+	/*margin:0 auto;*/
+}
+#canvas
+{
+  height: 100%;
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  /*margin:0 auto;*/
+}
+#controls
+{
+  bottom: 0;
+  left: 0;
+  margin:0 auto;
+  width: 100%;
+  color: red;
+}
+
+.fixedContainer {
+    background-color:#fff;
+    padding: 2em;
+    top: 0%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    width: 20rem;
+    position: fixed;
+    left: 70%;
+}
+
+div.header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    font-size: 40px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.scroll {
+    background-color: rgba(225, 255, 255, 0.29);
+    width: 100%;
+    height: 200px;
+    overflow-y: scroll;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 3px 0 rgba(0, 0, 0, 0.19);
+    padding: 5px;
+    margin: 0;
+}
+
+b{
+  margin-right: 10px;
+}
+
+hr{
+  margin: 3px 0px !important;
+}
+/*.fixedContainerLeft {
+    background-color:#ddd;
+    position: fixed;
+    padding: 2em;
+    left: 85%;
+    top: 15%;
+    transform: translateX(-50%);
+}*/

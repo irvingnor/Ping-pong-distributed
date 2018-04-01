@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pong!!!</title>
+	<link rel="stylesheet" type="text/css" href="css/estilo.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	var socket = io();
+	var usuario_id = -1;
+	var nombre_chat = "";
+
+	setTimeout(function(){
+		sendServerData();
+	},100);
+
+	socket.on('server',function(data){
+		console.log("Serv:" + data.msg);
+	});
+
+	socket.on('positionPlayer',function(data){
+		console.log("Usuario:" + data.position.usuario);
+		console.log("x:" + data.position.x);
+	});
+
+	$(document).ready(function(){
+		$("#msgChat").keyup(function(event) {
+		    if (event.keyCode === 13) {
+		        sendMsgChat();
+		    }
+		});
+	});
+
+	socket.on('updateChat',function(data){
+		console.log("Chat:"+JSON.stringify(data) );
+		$("#mensajesChat").append(data.data.msg);
+	});
+
+	function sendMsgChat(){
+		var msg = $("#msgChat").val();
+		$("#msgChat").val("");
+		var text_to_insert = "<b>"+nombre_chat+":</b>"+msg +"<hr>";
+		$("#mensajesChat").append(text_to_insert);
+		socket.emit('msgChat',{msg: text_to_insert});
+	}
+	</script>
+</head>
+<body>
+	<div id="game">
+		<canvas id="canvas"></canvas>
+		<audio preload="true" id="collide">
+			<source src="sounds/chocar.wav" />
+		</audio>
+		<audio preload="true" id="perder">
+			<source src="sounds/perder.wav" />
+		</audio>
+		<menu id="controls">
+  		</menu>
+	</div>
+	<div class="fixedContainer">
+	  <div class="header" style="background-color:#7cc6e2;">
+	    <h4 id="nUser"></h4>
+	  </div>
+
+	  <div class="container">
+	    <p id="isReadyPlayer" style="background-color:#FFFFFF;"></p>
+	  </div>
+	</div>
+
+	<div class="card" style="width: 20rem;position: fixed;left: 70%;top: 20%;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+	  <img class="card-img-top" src="img/tec_logo.png" alt="Logo TEC" style="width: 52%;height: auto;margin: 10px auto;">
+	  <div class="card-body">
+	    <h4 class="card-title">Chat</h4>
+	    <p class="scroll" id="mensajesChat"></p>
+	    <textarea id="msgChat" rows="4" cols="35" style="width: 100%;    border: none;box-shadow:0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 3px 0 rgba(0,0,0,0.19);height:70px;"></textarea>
+	    <a style="width:100%" href="#" onclick="sendMsgChat()" class="btn btn-primary" id="btnEnviarMsg">Enviar mensaje</a>
+	  </div>
+	</div>
+	<!-- <div id="nUser" class="fixedContainer"></div>
+	<div id="isReadyPlayer" class="fixedContainerLeft"></div> -->
+</body>
+</html>
+<script src="js/pong.js"></script>
